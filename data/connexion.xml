@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page id="connexion">
+    <siteName>MN Prestige</siteName>
+    <logo>/e-commerce-front/assets/images/logo.png</logo>
+    <title>Connexion</title>
+    
+    <!-- IMPORTANT : chemin CSS global (assure-toi que le fichier existe) -->
+    <css>/e-commerce-front/assets/css/style.css</css>
+    
+    <!-- zone d'erreur (backend peut écrire un message ici) -->
+    <error></error>
+    
+    <!-- préremplissage optionnel -->
+    <prefill>
+        <email></email>
+    </prefill>
+</page>

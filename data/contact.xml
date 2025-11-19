@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page id="contact">
+    <siteName>MN Prestige</siteName>
+    <logo>/e-commerce-front/assets/images/logo.png</logo>
+    <title>Contact</title>
+    
+    <contact>
+        <intro>
+            <heading>Contactez MN Prestige</heading>
+            <sub>Notre équipe est à votre écoute pour commandes, collaborations et service client.</sub>
+        </intro>
+        
+        <details>
+            <address>Quartier Plateau, Dakar, Sénégal</address>
+            <email>mn@prestige.com</email>
+            <phone>+221 77 123 45 67</phone>
+            <hours>
+                <weekday>Lundi - Vendredi : 09:00 - 18:00</weekday>
+                <saturday>Samedi : 10:00 - 16:00</saturday>
+                <sunday>Dimanche : Fermé</sunday>
+            </hours>
+        </details>
+        
+        <!-- Si tu veux afficher une map statique, remplis mapEmbed (optionnel) -->
+        <!-- <mapEmbed>https://www.google.com/maps/embed?pb=...</mapEmbed> -->
+        
+        <form>
+            <introText>Envoyez-nous un message — nous répondons sous 24-48h.</introText>
+            <fields>
+                <field name="firstname" type="text" label="Prénom" placeholder="Votre prénom" required="true"/>
+                <field name="lastname" type="text" label="Nom" placeholder="Votre nom" required="true"/>
+                <field name="email" type="email" label="E-mail" placeholder="prenom@exemple.com" required="true"/>
+                <field name="phone" type="tel" label="Téléphone" placeholder="+221 77 123 45 67" required="false"/>
+                <field name="message" type="textarea" label="Message" placeholder="Tapez votre message ici..." required="true"/>
+            </fields>
+            <submitLabel>Soumettre</submitLabel>
+        </form>
+    </contact>
+</page>

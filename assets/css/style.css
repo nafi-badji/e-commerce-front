@@ -1,0 +1,1828 @@
+/* style.css - thème mode (header, hero, produits, footer) */
+
+/* variables */
+:root{
+  --primary:#1f7edb;
+  --accent:#4aa3ff;
+  --bg:#ffffff;
+  --muted:#6b7280;
+  --text:#0b2540;
+  --card-shadow: 0 8px 22px rgba(10,20,40,0.06);
+  --radius:12px;
+}
+
+/* reset */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--text); background:#fafafa;}
+
+/* header (uses base.xsl markup) */
+.site-header{background:var(--bg);border-bottom:1px solid #eef4fb;position:sticky;top:0;z-index:40}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:16px}
+.header-nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+.header-nav a{color:var(--text);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px}
+.header-nav a:hover{background:#f4fbff}
+.brand-logo{height:44px;display:block}
+.cart-count{background:#ff6b6b;color:#fff;padding:2px 6px;border-radius:999px;font-size:.75rem;margin-left:8px}
+
+/* ===== Hero stylé : lanière centrale, dégradé, bouton = MN Prestige style ===== */
+
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 240px;          /* hauteur mobile minimale */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 18px 0 30px;
+  overflow: visible;
+}
+
+/* fond : image si fournie ou gradient si none */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.6) contrast(1);
+  z-index: 1;
+}
+
+/* fallback gradient (si pas d'image) */
+.hero-bg.gradient-bg {
+  background: linear-gradient(135deg, rgba(42,111,184,0.95) 0%, rgba(11,37,64,0.95) 100%);
+}
+
+/* LA LANIERE - cadre centré avec ombre et bord arrondi */
+.hero-strap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 18px 12px;
+  pointer-events: none; /* laisse cliquer le bouton seulement */
+}
+
+/* inner card qui contient texte + CTA */
+.hero-inner{
+  pointer-events: auto;
+  max-width: 1100px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.88));
+  padding: 28px 30px;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(8,18,30,0.09);
+  text-align: center;
+  border: 1px solid rgba(11,37,64,0.04);
+}
+
+/* titre élégant */
+.hero-title{
+  font-family: 'Playfair Display', serif; /* si importé dans style.css */
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #0b2540;
+  letter-spacing: 0.6px;
+}
+
+/* sous-texte */
+.hero-sub{
+  color: #5b6b78;
+  margin: 0 0 14px;
+  font-size: 1rem;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* bouton central (visuel lanière) */
+.hero-cta{
+  display:inline-block;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0b2540, #2a6fb8);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 10px 28px rgba(42,111,184,0.14);
+}
+
+/* décoration fine : petite barre au dessus (optionnelle) */
+.hero-inner::before{
+  content: "";
+  display:block;
+  width: 70px;
+  height:4px;
+  background: linear-gradient(90deg,#2a6fb8,#0b2540);
+  margin: -18px auto 16px;
+  border-radius: 2px;
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .hero-title{font-size:1.6rem}
+  .hero-inner{padding:20px}
+  .hero-banner{min-height:200px}
+}
+
+@media (max-width:560px){
+  .hero-title{font-size:1.25rem}
+  .hero-sub{font-size:.95rem;padding:0 6px}
+  .hero-inner{padding:14px;border-radius:10px}
+  .hero-inner::before{width:48px;margin-top:-12px}
+}
+
+
+/* hover / focus */
+.header-right .btn-login:hover,
+a.btn-login:hover,
+.header-right .btn-login:focus,
+a.btn-login:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(31,126,219,0.16);
+  opacity: 0.98;
+}
+
+/* ensure no underline from other rules */
+.header-right .btn-login,
+a.btn-login { text-decoration: none !important; }
+
+
+/* =======================
+   FOOTER GLOBAL
+   ======================= */
+
+.site-footer {
+    width: 100%;
+    background: #0b2540;
+    color: #d9e3f0;
+    padding: 30px 10px;
+}
+
+.footer-inner {
+    max-width: 1200px; 
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 180px;
+}
+
+.footer-col h4 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+}
+
+.footer-col p,
+.footer-col ul,
+.footer-col li,
+.footer-col a {
+    color: #d9e3f0;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col li {
+    margin: 6px 0;
+}
+
+.footer-social img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    opacity: 0.85;
+}
+.footer-social img:hover {
+    opacity: 1;
+}
+
+.footer-copy {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 0.85rem;
+    color: #b5c4d6;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+
+
+
+/* BRAND (logo + nom) */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* espace entre logo et texte */
+    text-decoration: none;
+}
+
+.brand-logo {
+    height: 55px;   /* logo plus grand et plus visible */
+    width: auto;
+    border-radius: 50%; /* effet plus clean */
+}
+
+.brand-name {
+    font-size: 1.4rem;      /* texte plus grand */
+    font-weight: 700;
+    letter-spacing: 1px;    /* effet élégant */
+    color: #0b2540;
+}
+
+.brand:hover .brand-name {
+    opacity: 0.8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === Typography & brand setup (MN Prestige) === */
+/* Import Google Fonts (Playfair Display = élégant, Montserrat = UI) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+
+:root{
+  --brand-1: #0b2540; /* deep navy */
+  --brand-2: #2a6fb8; /* accent blue */
+  --muted: #6b7280;
+  --bg: #fafafa;
+  --card-shadow: 0 10px 30px rgba(10,20,40,0.06);
+  --radius: 12px;
+}
+
+/* Base font settings */
+html,body{font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, Arial; color:var(--brand-1); background:var(--bg); margin:0; padding:0;}
+
+/* Brand (logo + name) - header */
+.brand { display:flex; align-items:center; gap:14px; text-decoration:none; }
+.brand-logo { height:56px; width:auto; display:block; }
+.brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size:1.5rem;
+  font-weight:700;
+  letter-spacing:1px;
+  color:var(--brand-1);
+  text-transform: none;
+}
+
+/* Header tweaks: center nav, slim header */
+.site-header{background:transparent; padding:18px 0; border-bottom:1px solid rgba(11,37,64,0.06); position:sticky; top:0; z-index:50;}
+.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 20px;}
+.header-nav a{font-weight:600; color:var(--brand-1); padding:8px 12px; border-radius:8px}
+.header-nav a:hover{background:rgba(42,111,184,0.06)}
+
+/* Connexion button - more prominent */
+a.btn-login {
+  font-family: 'Montserrat', sans-serif;
+  padding:9px 16px;
+  border-radius:999px;
+  background: linear-gradient(90deg,var(--brand-1),var(--brand-2));
+  color:#fff !important;
+  font-weight:700;
+  text-decoration:none !important;
+  box-shadow: 0 10px 30px rgba(42,111,184,0.12);
+  transition: transform .15s ease, opacity .15s;
+}
+a.btn-login:hover { transform: translateY(-2px); opacity:0.98; }
+
+/* Hero: big, centered, fashion feel */
+.hero-fashion .hero-inner{
+  max-width:1100px;
+  margin:0 auto;
+  padding:110px 20px 70px;
+  text-align:center;
+  color:var(--brand-1);
+}
+.hero-fashion h1{
+  font-family:'Playfair Display', serif;
+  font-size:2.6rem;
+  font-weight:700;
+  margin:0 0 12px;
+  letter-spacing:0.6px;
+}
+.hero-fashion .muted{font-size:1rem;color:var(--muted);max-width:760px;margin:0 auto 16px}
+
+/* Buttons */
+.btn-primary{
+  background:linear-gradient(90deg,var(--brand-1),var(--brand-2));
+  color:#fff;
+  padding:12px 26px;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  display:inline-block;
+  box-shadow:0 12px 30px rgba(10,30,80,0.08);
+}
+
+/* Cards: light, airy, centered text */
+.card-product { border-radius:12px; box-shadow:var(--card-shadow); overflow:hidden; background:#fff; display:flex; flex-direction:column; }
+.card-body .product-name { font-family:'Playfair Display', serif; font-weight:600; text-align:center; margin:8px 0; font-size:1.05rem; }
+.card-body .excerpt { text-align:center; color:var(--muted); font-size:.95rem; }
+
+/* Footer compact */
+.site-footer { background:#081a2a; color:#dbeaf7; padding:26px 0; }
+.footer-inner { max-width:1200px; margin:0 auto; display:flex; gap:36px; justify-content:space-between; align-items:flex-start; padding:0 20px; }
+.footer-col h4 { font-family:'Playfair Display', serif; color:#fff; margin-bottom:10px; font-size:1.02rem; }
+
+/* Responsive small */
+@media(max-width:880px){
+  .header-inner{padding:0 14px}
+  .hero-fashion .hero-inner{padding:70px 16px 40px}
+  .brand-name{font-size:1.2rem}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =====================
+   SECTION PRODUITS VEDETTES
+   ===================== */
+
+/* Titre centré */
+.section-title{
+  text-align:center;
+  font-family:'Playfair Display', serif;
+  font-size:1.4rem;
+  font-weight:700;
+  color:#0b2540;
+  margin:10px 0 18px;
+}
+
+/* Grille */
+.featured{
+  max-width:1200px;
+  margin:0 auto 40px;
+  padding:0 16px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
+}
+
+/* Carte produit */
+.card-product{
+  background:#ffffff;
+  border-radius:12px;
+  box-shadow:0 10px 26px rgba(10,20,40,0.06);
+  border:1px solid #eef2f8;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+/* Image produit bien cadrée */
+.card-media{
+  height:220px;
+  background:#f6f7fb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.card-media{
+  height: 220px;
+  background:#f4f5fb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding: 8px; /* petit espace pour respirer */
+}
+
+.card-media{
+  height: 220px;
+  background:#f4f5fb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding: 8px; /* petit espace pour respirer */
+}
+
+.card-media img{
+  width:100%;
+  height:100%;
+  object-fit:contain; /* <-- IMPORTANT : on affiche toute l’image */
+  object-position:center;
+}
+
+
+
+/* Texte */
+.card-body{
+  padding:14px 14px 16px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.product-name{
+  font-family:'Playfair Display', serif;
+  font-size:1.05rem;
+  font-weight:700;
+  text-align:center;
+  margin:0;
+}
+
+.excerpt{
+  color:#6b7280;
+  font-size:.93rem;
+  text-align:center;
+  margin:4px 0 10px;
+}
+
+/* Prix + bouton */
+.meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:4px;
+}
+
+.price{
+  font-weight:800;
+  color:#0b2540;
+}
+
+/* Bouton AJOUTER AU PANIER */
+.card-product .add{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:999px;
+  background:#e9f4ff;
+  color:#1f7edb;
+  font-weight:700;
+  font-size:.9rem;
+  text-decoration:none;
+  border:1px solid #cfe3ff;
+  text-align:center;
+  white-space:nowrap;
+  transition:background .15s ease, transform .12s ease, box-shadow .12s ease;
+}
+
+.card-product .add:hover{
+  background:#1f7edb;
+  color:#ffffff;
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(31,126,219,0.16);
+}
+
+/* Responsive léger */
+@media (max-width:600px){
+  .card-media{height:190px;}
+}
+
+
+
+
+main {
+    min-height: calc(100vh - 250px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== auth (connexion / inscription) ===== */
+.auth-section { padding:40px 16px 80px; display:flex; justify-content:center; align-items:flex-start; }
+.auth-wrapper{width:100%;max-width:1100px;display:flex;gap:28px;align-items:stretch;justify-content:center;}
+.auth-card{flex:1;max-width:560px;background:#fff;border-radius:12px;padding:22px;box-shadow:0 20px 50px rgba(10,20,40,0.06);border:1px solid rgba(11,37,64,0.04);}
+.auth-brand{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.auth-logo{height:46px}
+.auth-site{font-family:'Playfair Display',serif;font-weight:700;color:#0b2540;font-size:1.15rem}
+.auth-error{background:linear-gradient(90deg,rgba(255,100,100,0.06),rgba(255,80,80,0.04));border:1px solid rgba(255,80,80,0.12);color:#8b1d1d;padding:10px;border-radius:8px;margin:10px 0 14px;font-weight:600;}
+.auth-form label{display:block;font-size:0.92rem;margin:10px 0 6px;color:#6b7280}
+.auth-form input[type="email"],.auth-form input[type="password"],.auth-form input[type="text"]{width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e7edf5;background:#fbfdff;font-size:1rem}
+.auth-row{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.auth-row .remember{display:flex;align-items:center;gap:8px;color:#425a6a}
+.btn-primary.auth-submit{margin-top:18px;width:100%;padding:11px;border-radius:999px;background:linear-gradient(90deg,#0b5fa8,#4aa3ff);color:#fff;border:none;font-weight:700;cursor:pointer;box-shadow:0 12px 32px rgba(42,111,184,0.14)}
+.auth-side{width:320px;background:linear-gradient(180deg,rgba(10,20,40,0.03),rgba(10,20,40,0.01));border-radius:12px;padding:20px;color:#0b2540;display:flex;flex-direction:column;gap:10px}
+@media(max-width:980px){.auth-wrapper{flex-direction:column;align-items:center}.auth-side{width:100%}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================
+   Connexion : style premium (MN-Prestige)
+   Ajoute ceci à la fin de assets/css/style.css
+   =============================== */
+
+/* layout global : garantir footer collé en bas */
+html,body { height:100%; }
+body { display:flex; flex-direction:column; min-height:100vh; }
+
+/* header déjà existant, on s'assure qu'il ne casse pas */
+.site-header { z-index:50; }
+
+/* main : prend l'espace restant pour pousser le footer */
+main { flex:1 0 auto; }
+
+/* hero / page connexion */
+.auth-hero{
+  background: linear-gradient(180deg, #b8ccdb 0%, #99bad0 35%, #99a3b9 100%);
+  padding:48px 16px;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  color:#0b2540;
+}
+
+/* conteneur centré */
+.auth-hero .auth-wrap{
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  gap:34px;
+  align-items:flex-start;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+/* carte formulaire (gauche) */
+.auth-card{
+  flex:1 1 540px;
+  background: linear-gradient(180deg,#ffffff,#fbfdff);
+  border-radius:14px;
+  padding:30px;
+  box-shadow: 0 18px 40px rgba(9,20,30,0.06);
+  border:1px solid rgba(11,37,64,0.04);
+  min-width:300px;
+}
+
+/* brand area */
+.auth-card .brand{
+  display:flex;
+  gap:16px;
+  align-items:center;
+  margin-bottom:18px;
+}
+.auth-card .brand img{ height:88px; width:88px; border-radius:50%; object-fit:cover; padding:8px; background:#fff; border:1px solid rgba(11,37,64,0.04) }
+.auth-card .brand .brand-name{ font-family:"Playfair Display", serif; font-size:1.3rem; font-weight:700; color:#0b2540; }
+.auth-card .brand .brand-sub{ color:#6b7280; font-size:.95rem; }
+
+/* form fields */
+.auth-card label{ display:block; margin-top:12px; color:#4a5a66; font-weight:600; font-size:.95rem; }
+.auth-card input[type="email"], .auth-card input[type="password"]{
+  width:100%;
+  padding:12px 14px;
+  margin-top:8px;
+  border-radius:10px;
+  border:1px solid #fbe7e9;
+  background:linear-gradient(180deg,#fff,#fbfdff);
+  font-size:1rem;
+  transition: box-shadow .18s, border-color .18s;
+}
+.auth-card input:focus{
+  outline:none;
+  border-color:#bfe0ff;
+  box-shadow:0 8px 20px rgba(74,163,255,0.08);
+}
+
+/* row remember + link */
+.auth-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:12px;
+}
+.auth-row .remember{ display:inline-flex; align-items:center; gap:8px; color:#6b7280; }
+.auth-row .link-secondary{ color:#0b5fa8; font-weight:700; text-decoration:none; }
+
+/* button */
+.btn-auth{
+  margin-top:18px;
+  display:inline-block;
+  padding:11px 20px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#4aa3ff,#2f86e6);
+  color:#fff;
+  font-weight:700;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 12px 28px rgba(46,118,199,0.12);
+}
+
+/* right promo column */
+.auth-side{
+  flex:0 0 340px;
+  min-width:260px;
+  padding:26px 22px;
+  border-radius:12px;
+  background: linear-gradient(180deg,#ffffff,#f7fbff);
+  border:1px solid rgba(11,37,64,0.03);
+  box-shadow:0 8px 28px rgba(10,20,30,0.03);
+}
+.auth-side h2{ font-family:"Playfair Display", serif; color:#0b2540; margin:0 0 8px; font-size:1.25rem; }
+.auth-side .muted{ color:#6b7280; margin-bottom:14px; }
+
+/* benefits */
+.benefits{ display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+.benefits .b{ padding:10px; border-radius:8px; background:linear-gradient(90deg,#fff,#fbfdff); border:1px solid rgba(11,37,64,0.03); }
+.benefits strong{ display:block; color:#0b2540; }
+.benefits span{ color:#6b7280; font-size:0.95rem; }
+
+/* small alert (error) */
+.alert-error{
+  background:#fff0f2;
+  color:#8b1f3a;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ffd0db;
+  margin-bottom:12px;
+}
+
+/* small screen */
+@media (max-width:920px){
+  .auth-hero{padding:36px 12px}
+  .auth-side{order:2;width:100%;}
+  .auth-card{order:1;width:100%;}
+  .auth-card .brand img{height:72px;width:72px;}
+  .auth-hero .auth-wrap{gap:18px}
+}
+@media (max-width:420px){
+  .auth-card{padding:20px}
+  .auth-side{padding:18px}
+  .btn-auth{width:100%}
+}
+
+/* footer tweak: reduce height and full width */
+.site-footer{ padding:28px 18px 22px; border-top:3px solid rgba(74,163,255,0.12); }
+.site-footer .footer-inner{ max-width:1100px; margin:0 auto; }
+
+/* tiny cosmetic: link hover */
+a:hover{ opacity:.95; transform: translateY(0); transition: all .12s ease; }
+
+  
+
+
+
+
+
+
+/* ====== FONTS PREMIUM FASHION ====== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* Police par défaut */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Titres élégants */
+h1, h2, h3, h4, .brand-name {
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 600;
+}
+   
+
+
+
+
+
+
+.brand-name {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    color: #1a1f36;
+}
+
+
+
+
+
+
+
+
+
+
+.back-home {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2f7fe6;
+    text-decoration: none;
+    transition: 0.25s ease-in-out;
+}
+
+.back-link:hover {
+    color: #0b5bd1;
+    transform: translateX(-3px);
+}
+
+.icon-back {
+    stroke: currentColor;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//* ============================
+   Registration (Fashion Premium)
+   ============================ */
+
+/* center wrapper */
+.register-page {
+  min-height: calc(100vh - 200px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px 18px;
+  background: linear-gradient(135deg,#e9f4ff 0%, #f7fbff 50%, #ffffff 100%);
+}
+
+/* card container - centered and constrained */
+.register-card-centered {
+  width:100%;
+  max-width:1100px;
+  display:grid;
+  grid-template-columns: 1fr 380px;
+  gap:28px;
+  align-items:start;
+}
+
+/* individual cards */
+.register-card {
+  border-radius:16px;
+  padding:22px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(250,250,250,0.9));
+  box-shadow: 0 12px 40px rgba(15,30,60,0.06);
+  border: 1px solid rgba(10,20,30,0.04);
+}
+
+/* specific widths */
+.register-card--form { min-height: 520px; }
+.register-card--info { padding:26px; }
+
+/* brand small */
+.brand-small { display:flex; gap:14px; align-items:center; margin-bottom:12px; }
+.brand-small-logo { width:56px; height:56px; border-radius:12px; object-fit:cover; border:1px solid rgba(0,0,0,0.04); background:#fff; padding:6px; }
+.brand-small-title { font-family:'Playfair Display', serif; font-size:1.15rem; margin:0; color:#1b2b3a; }
+
+/* grid 2 */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:980px) { .register-card-centered { grid-template-columns: 1fr; } .grid-2 { grid-template-columns:1fr; } }
+
+/* fields */
+.field { margin-bottom:12px; }
+.field label { display:block; margin-bottom:6px; font-weight:600; color:#284052; }
+.field input[type="text"], .field input[type="email"], .field input[type="password"], .field input[type="date"] {
+  width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(20,40,60,0.06); background:#fff; outline:none;
+  transition: box-shadow .12s, border-color .12s;
+}
+.field input:focus { box-shadow:0 8px 20px rgba(46,120,210,0.08); border-color: rgba(74,163,255,0.45); }
+
+/* input icon group */
+.input-icon { display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:10px; background:#fff; border:1px solid rgba(20,40,60,0.04); }
+.input-icon input { border:none; background:transparent; padding:8px 6px; flex:1; }
+
+/* pwd toggle */
+.pwd-toggle { background:transparent; border:none; color:#2f6fb7; font-weight:600; cursor:pointer; padding:6px 8px; }
+
+/* avatar */
+.avatar-row { display:flex; gap:12px; align-items:center; }
+.avatar-preview { width:72px; height:72px; border-radius:12px; background:#f3f7fb; border:1px dashed rgba(20,40,60,0.04); background-size:cover; background-position:center; }
+
+/* small text */
+.muted { color:#6b7f8f; font-size:0.95rem; }
+
+/* checkbox */
+.checkbox { display:flex; align-items:center; gap:8px; }
+
+/* actions */
+.actions { margin-top:14px; display:flex; align-items:center; gap:12px; }
+.btn-primary { padding:11px 16px; border-radius:12px; border:none; background:linear-gradient(135deg,#4ea8ff,#3b7dff); color:#fff; font-weight:700; cursor:pointer; box-shadow:0 10px 28px rgba(59,125,255,0.18); }
+
+/* info card */
+.card-glass { background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(245,250,255,0.85)); border-radius:12px; padding:18px; border:1px solid rgba(20,40,60,0.03); box-shadow:0 8px 22px rgba(12,24,40,0.04); }
+.card-glass h2 { font-family:'Playfair Display', serif; margin-top:0; color:#122231; }
+.card-glass p { color:#516779; }
+
+/* back premium */
+.back-link-premium { display:inline-flex; align-items:center; gap:10px; padding:10px 18px; border-radius:12px; background:linear-gradient(135deg,#eef6ff,#e6f0ff); color:#1f3c88; text-decoration:none; box-shadow:0 8px 26px rgba(31,60,136,0.08); }
+.back-link-premium:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(31,60,136,0.12); }
+
+/* responsive tweaks */
+@media (max-width:640px) {
+  .brand-small-logo { width:48px; height:48px; }
+  .avatar-preview { width:60px; height:60px; }
+  .register-card--form { min-height: auto; }
+  .btn-primary { width:100%; justify-content:center; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Inscription / Connexion — styles premium ===== */
+/* Police (si déjà chargée, ok) */
+:root{
+  --primary-light:#7fc6ff;
+  --primary:#4aa3ff; /* bleu ciel demandé */
+  --primary-2:#2e7efb;
+  --muted:#6b7280;
+  --card-bg:#ffffff;
+  --accent:#0b2540;
+}
+
+/* Page wrapping */
+.register-page{ padding:48px 18px 80px; background: linear-gradient(180deg, #f7fbff 0%, #f1f7ff 100%); }
+
+/* Main container */
+.register-card-centered{
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  gap:32px;
+  align-items:flex-start;
+  justify-content:center;
+  box-sizing:border-box;
+}
+
+/* Form card */
+.register-card--form{
+  flex: 0 1 680px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.98));
+  border-radius:14px;
+  padding:28px;
+  box-shadow: 0 18px 40px rgba(11,37,64,0.06);
+  border:1px solid rgba(11,37,64,0.04);
+}
+
+/* Remove / hide right info column if present */
+.register-card-centered > .right-column { display:none; }
+
+/* brand small at top of form */
+.brand-small{ display:flex; gap:14px; align-items:center; margin-bottom:18px; }
+.brand-small-logo{ width:62px; height:62px; border-radius:999px; object-fit:cover; border:1px solid rgba(11,37,64,0.06); padding:8px; background:#fff; }
+.brand-small-title{ font-family:'Playfair Display', serif; font-weight:600; margin:0; font-size:1.05rem; color:var(--accent); }
+
+/* Grid helpers matching ton XSL structure */
+.grid-2{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px 18px; align-items:start; }
+.field{ margin-bottom:14px; }
+.field label{ display:block; margin-bottom:8px; font-weight:600; color:var(--accent); font-size:.95rem; }
+
+/* Inputs */
+.register-card--form input[type="text"],
+.register-card--form input[type="email"],
+.register-card--form input[type="password"],
+.register-card--form input[type="tel"],
+.register-card--form input[type="date"],
+.register-card--form input[type="file"]{
+  width:100%;
+  padding:12px 14px;
+  border-radius:8px;
+  border:1px solid rgba(11,37,64,0.07);
+  background:#fbfdff;
+  transition:box-shadow .14s ease, border-color .14s ease;
+  font-size:0.95rem;
+}
+.register-card--form input:focus{
+  border-color:var(--primary);
+  box-shadow: 0 10px 28px rgba(74,163,255,0.10);
+  outline:none;
+}
+
+/* inline input with "Voir" button at right */
+.input-icon{ position:relative; }
+.input-icon .pwd-toggle{
+  position:absolute; right:8px; top:50%; transform:translateY(-50%);
+  border:none; background:transparent; color:var(--primary-2); font-weight:700; cursor:pointer;
+}
+
+/* small helper text */
+.muted{ color:var(--muted); font-size:.95rem; }
+.small{ font-size:.9rem; color:var(--muted); }
+
+/* Avatar preview */
+.avatar-row{ display:flex; gap:12px; align-items:center; }
+.avatar-preview{
+  width:64px; height:64px; border-radius:8px; background: #f3f6fb; border:1px dashed rgba(11,37,64,0.04);
+  display:inline-block; background-size:cover; background-position:center;
+}
+
+/* primary button (Créer le compte) */
+.btn-primary{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-2));
+  color:#fff;
+  padding:12px 18px;
+  border-radius:10px;
+  border:0;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow: 0 12px 30px rgba(46,126,251,0.12);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 18px 36px rgba(46,126,251,0.16); }
+
+/* checkbox link */
+.checkbox{ display:flex; gap:8px; align-items:center; color:var(--muted); }
+
+/* back link styling */
+.back-link-premium{
+  display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--muted); font-weight:700;
+}
+
+/* responsive */
+@media (max-width:980px){
+  .register-card-centered{ display:block; padding:0 16px; }
+  .grid-2{ grid-template-columns:1fr; }
+  .register-card--form{ padding:22px; border-radius:12px; }
+}
+
+/* Make the create-btn at bottom visible if not styled elsewhere */
+#registerBtn.btn{ background:linear-gradient(90deg,var(--primary),var(--primary-2)); color:#fff; border:0; padding:10px 14px; border-radius:8px; cursor:pointer; }
+
+/* ensure file input doesn't look broken */
+.register-card--form input[type="file"]{ padding:6px 8px; border-radius:6px; border:1px solid rgba(11,37,64,0.04); background:#fff; }
+
+/* tiny cosmetics for footer */
+.site-footer{ margin-top:44px; }
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Corrections : bouton connexion + footer ===== */
+
+/* 1) style du bouton "Connexion / Se connecter" dans l'en-tête */
+.btn-login{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 14px;
+  border-radius:10px;
+  background: linear-gradient(90deg, #6fc0ff 0%, #3f94ff 100%);
+  color:#fff !important;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow: 0 8px 22px rgba(63,148,255,0.15);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s;
+}
+.btn-login:hover{ transform: translateY(-2px); box-shadow:0 18px 36px rgba(63,148,255,0.18); opacity:0.98; }
+
+/* Si le bouton est un <button> au lieu d'un <a>, appliquer aussi */
+button.btn-login{ cursor:pointer; }
+
+/* 2) Footer : mise en ligne, réduction de l'espace et icônes */
+.site-footer{
+  background: linear-gradient(180deg,#071427 0%, #0b2540 100%);
+  color:#d9e3f0;
+  padding:28px 18px; /* réduit la hauteur verticale */
+  box-sizing:border-box;
+  border-top: 3px solid rgba(74,163,255,0.08);
+}
+
+/* footer container (déjà présent mais on force un comportement horizontal propre) */
+.site-footer .footer-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  gap:28px;
+  align-items:flex-start;
+  justify-content:space-between; /* répartit les colonnes horizontalement */
+  flex-wrap:wrap;
+  box-sizing:border-box;
+}
+
+/* colonnes : taille équitable */
+.site-footer .footer-inner > div{
+  flex: 1 1 220px;
+  min-width:180px;
+}
+
+/* titres */
+.site-footer h4{ color:#ffffff; margin-bottom:12px; font-size:1.02rem; }
+
+/* liens en ligne/compact */
+.site-footer ul{ list-style:none; padding:0; margin:0; }
+.site-footer ul li{ margin:6px 0; }
+.site-footer a{ color:#d9e3f0; text-decoration:none; }
+.site-footer a:hover{ color:#7fc6ff; }
+
+/* réseaux sociaux : ligne, icônes plus propres */
+.site-footer .icons{ display:flex; gap:12px; align-items:center; }
+.site-footer .icons img{ width:28px; height:28px; object-fit:cover; border-radius:6px; background:#fff; padding:3px; }
+
+/* copyright / petit texte */
+.site-footer .footer-copy{
+  grid-column:1 / -1;
+  text-align:center;
+  padding-top:12px;
+  border-top:1px solid rgba(255,255,255,0.04);
+  color:rgba(255,255,255,0.7);
+  margin-top:18px;
+  font-size:0.92rem;
+}
+
+/* Ajustements responsive */
+@media (max-width:880px){
+  .site-footer .footer-inner{ gap:18px; }
+  .site-footer .footer-inner > div{ flex: 1 1 100%; }
+  .btn-login{ padding:8px 12px; font-size:0.95rem; }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Icônes réseaux premium */
+.site-footer .icons {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.site-footer .icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    transition: 0.15s ease-in-out;
+}
+
+.site-footer .icons a:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.25);
+}
+
+.site-footer .icons img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+
+
+
+
+
+
+
+/* Style premium pour les liens Conditions & Se connecter */
+.register-form a {
+    color: #005fcc;                  /* Bleu premium */
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+}
+
+.register-form a:hover {
+    color: #003f8a;
+    text-decoration: underline;
+}
+
+/* Style du texte "Vous avez déjà un compte ?" */
+.register-form p.muted {
+    font-size: 14px;
+    margin-top: 8px;
+    color: #666;
+}
+
+/* Espace propre autour de la checkbox + conditions */
+.register-form .checkbox a {
+    font-weight: 600;
+}
+
+.register-form .checkbox input {
+    margin-right: 6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== About page small additions ===== */
+.hero--about{ background: linear-gradient(180deg, rgba(250,250,251,1), rgba(245,247,250,1)); padding:48px 0; border-radius:8px; margin-bottom:28px; }
+.hero--about .hero-inner{ max-width:1100px; margin:0 auto; text-align:center; }
+.hero--about h1{ font-family: "Playfair Display", serif; font-size:2.2rem; color:#123; margin:8px 0; }
+.hero--about .muted{ color:#6b7280; margin-top:6px; }
+
+.about-section{ padding:36px 0; }
+.about-section .container{ max-width:1100px; margin:0 auto; }
+
+.about-section h2{ font-family:"Playfair Display", serif; font-size:1.4rem; margin-bottom:14px; color:#0b2540; }
+.about-section p{ color:#556; line-height:1.65; }
+
+.split{ display:flex; gap:28px; align-items:flex-start; }
+.split .col{ flex:1; }
+
+.team-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-top:12px; }
+.team-member{ display:flex; gap:18px; background:#fff; padding:15px; border-radius:12px; align-items:center; box-shadow:0 6px 18px rgba(2,10,30,0.04); border:1px solid #f1f6fb; }
+.team-member .avatar img{
+    width:135px;
+    height:135px;
+    object-fit:cover;
+    
+              /* OR luxueux */
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    transition:transform .25s ease;
+}
+
+.team-member:hover .avatar img{
+    transform:scale(1.05);               /* effet hover doux */
+}
+
+.team-member .info h3{ margin:0 0 6px; font-size:1.05rem; }
+.team-member .info .role{ color:#6b7280; font-size:.95rem; margin-bottom:6px; }
+.features{ display:flex; flex-wrap:wrap; gap:10px 20px; list-style:none; padding:0; margin:10px 0 0;}
+.features li{ background:linear-gradient(90deg,#f3f8ff,#eef6ff); padding:10px 14px; border-radius:8px; color:#123; font-weight:600; }
+
+.about-cta{ background:linear-gradient(90deg,#f8fbff,#ffffff); padding:28px 0; border-top:1px solid rgba(2,10,30,0.03); text-align:center;}
+.about-cta .cta-text{ margin-bottom:12px; color:#444; }
+.btn-outline{ display:inline-block; padding:10px 16px; border-radius:10px; border:1px solid #4aa3ff; color:#0b63a8; text-decoration:none; font-weight:700; background:transparent; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----- Panier (empty state) ----- */
+.cart-section{ padding:48px 18px; background:linear-gradient(180deg,#fbfdff,#ffffff); min-height:60vh; }
+.cart-inner{ max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:center; }
+
+.cart-empty{
+  text-align:center;
+  background:linear-gradient(180deg, rgba(248,253,255,0.9), #ffffff);
+  padding:36px 28px;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(2,10,30,0.06);
+  border:1px solid rgba(6,30,60,0.04);
+  max-width:780px;
+  width:100%;
+  transition:transform .25s ease;
+}
+
+.cart-empty:hover{ transform:translateY(-4px); }
+
+.cart-empty-img{
+  display:block;
+  margin:0 auto 18px;
+  max-width:260px;
+  width:40%;
+  height:auto;
+  opacity:0.98;
+}
+
+.cart-empty-title{
+  font-family:"Playfair Display", serif;
+  font-size:1.6rem;
+  margin:6px 0 10px;
+  color:#0e2540;
+}
+
+.cart-empty-desc{
+  color:#556;
+  margin-bottom:18px;
+  font-size:0.98rem;
+}
+
+.btn{ display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:10px; text-decoration:none; font-weight:600; }
+.btn-primary{
+  background:linear-gradient(90deg,#4aa3ff,#2e7edb);
+  color:#fff;
+  box-shadow:0 8px 18px rgba(46,126,219,0.18);
+  border:0;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.btn-primary:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(46,126,219,0.22); }
+
+.btn-icon{ display:inline-block; margin-right:8px; }
+
+/* responsive */
+@media (max-width:800px){
+  .cart-empty{ padding:28px 18px; width:92%; }
+  .cart-empty-img{ width:60%; max-width:220px; }
+  .cart-inner{ padding-top:18px; }
+}
+
+
+
+
+
+
+
+.cart-empty { text-align:center; padding:48px 20px; }
+.cart-empty-img { max-width:320px; width:70%; height:auto; display:inline-block; margin-bottom:18px; }
+.cart-empty-title { font-family: "Playfair Display", serif; font-size:1.6rem; margin:8px 0; color:#1f2937; }
+.cart-empty-desc { color:#6b7280; margin-bottom:18px; }
+.btn-primary { background: linear-gradient(90deg,#4aa3ff,#0b63a8); color:#fff; padding:12px 20px; border-radius:10px; text-decoration:none; display:inline-flex; gap:8px; align-items:center; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Contact page styles ===== */
+.contact-hero{ padding:36px 18px 8px; background:linear-gradient(180deg,#f7fbff,#ffffff); text-align:center; border-radius:8px; margin-bottom:18px; }
+.contact-hero h1{ font-family:"Playfair Display", serif; font-size:2rem; margin:6px 0; color:var(--accent); }
+.contact-hero .muted{ color:var(--muted); margin-top:6px; }
+
+.contact-main .container{ max-width:1100px; margin:0 auto; padding:22px 12px; }
+.contact-grid{ display:grid; grid-template-columns: 1fr 360px; gap:28px; align-items:start; }
+
+.contact-card{ background:linear-gradient(180deg,#fff,#fbfdff); border-radius:12px; padding:20px; box-shadow:0 12px 30px rgba(2,10,30,0.04); border:1px solid rgba(11,37,64,0.04); }
+
+.contact-form-card h2, .contact-info-card h2{ margin-top:0; font-size:1.18rem; color:var(--accent); }
+.contact-form-card .muted{ margin-bottom:14px; color:var(--muted); }
+
+.field{ margin-bottom:14px; }
+.field label{ display:block; margin-bottom:8px; font-weight:600; color:var(--accent); }
+.field input, .field textarea{ width:100%; padding:12px 14px; border-radius:8px; border:1px solid rgba(11,37,64,0.06); background:#fbfdff; transition:box-shadow .14s; }
+.field textarea{ resize:vertical; min-height:120px; }
+.field input:focus, .field textarea:focus{ border-color:var(--primary-1); box-shadow:0 8px 20px rgba(74,163,255,0.08); outline:none; }
+
+.actions{ margin-top:6px; }
+.contact-info-card .info-row{ margin-bottom:12px; }
+.contact-info-card .info-row strong{ display:block; margin-bottom:6px; color:var(--accent); }
+.contact-info-card .hours{ list-style:none; padding:0; margin:0; color:var(--muted); }
+
+.contact-info-card .icons{ display:flex; gap:12px; margin-top:10px; }
+.contact-info-card .icons img{ width:34px; height:34px; object-fit:cover; border-radius:8px; background:#fff; padding:3px; }
+
+.map a{ display:inline-block; margin-top:12px; color:var(--primary-1); font-weight:700; text-decoration:none; }
+
+@media (max-width:980px){
+  .contact-grid{ grid-template-columns:1fr; }
+  .contact-info-card{ order:2; }
+  .contact-form-card{ order:1; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   Contact page — style
+   ========================= */
+
+/* layout général container / grid */
+.contact-main .container.contact-grid{
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 36px;
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 20px;
+}
+
+/* Card commun */
+.contact-card{
+  background: #fff;
+  border-radius: 12px;
+  padding: 26px;
+  box-shadow: 0 8px 30px rgba(10,20,30,0.05);
+  border: 1px solid rgba(2,10,30,0.04);
+}
+
+/* Form side */
+.contact-form-card h2{
+  font-family: "Playfair Display", serif;
+  margin: 0 0 10px;
+  font-size: 1.25rem;
+  color: #222;
+}
+.contact-form-card .muted{
+  color: #64707a;
+  margin-bottom: 18px;
+}
+
+/* Inputs */
+.contact-form-card .field{ margin-bottom: 16px; }
+.contact-form-card label{ display:block; margin-bottom:8px; color:#3c4b52; font-weight:600; }
+.contact-form-card input[type="text"],
+.contact-form-card input[type="email"],
+.contact-form-card input[type="tel"],
+.contact-form-card input[type="date"],
+.contact-form-card textarea{
+  width:100%;
+  background: #fbfdff;
+  border:1px solid #e6eef6;
+  padding:12px 14px;
+  border-radius:8px;
+  color:#1f2933;
+  font-size:0.95rem;
+  box-shadow:none;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+.contact-form-card input:focus,
+.contact-form-card textarea:focus{
+  outline:none;
+  border-color:#66b0ff;
+  box-shadow:0 6px 20px rgba(30,120,220,0.07);
+}
+
+/* textarea min-height */
+.contact-form-card textarea{ min-height:140px; resize:vertical; }
+
+/* Submit */
+.contact-form-card .actions{ margin-top:14px; }
+.btn-primary{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background: linear-gradient(180deg,#2f9cff,#1170e0);
+  color:#fff;
+  padding:10px 16px;
+  border-radius:10px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(17,112,224,0.22);
+}
+.btn-primary:hover{ transform:translateY(-2px); }
+
+/* Info side */
+.contact-info-card h2{ margin:0 0 8px; font-family:"Playfair Display", serif; color:#222; }
+.contact-info-card .info-row{ margin-bottom:14px; color:#4b5b62; }
+.contact-info-card .info-row strong{ display:block; color:#1f2933; margin-bottom:6px; font-weight:700; }
+
+/* style des liens phone / email */
+.contact-info-card a{
+  color:#0b63a8;
+  text-decoration:underline;
+  font-weight:600;
+}
+
+/* Ajout d'icônes via css selon href (phone / mail) */
+.contact-info-card a[href^="tel:"]::before,
+.contact-info-card a[href^="mailto:"]::before{
+  display:inline-block;
+  vertical-align:middle;
+  margin-right:8px;
+  font-size:14px;
+  opacity:0.95;
+}
+
+/* telephone: phone icon */
+.contact-info-card a[href^="tel:"]::before{
+  content: "☎"; /* ou unicode "\260E" */
+  color:#0b63a8;
+}
+
+/* email: envelope icon */
+.contact-info-card a[href^="mailto:"]::before{
+  content: "✉"; /* ou unicode "\2709" */
+  color:#0b63a8;
+}
+
+/* réseaux sociaux — icônes */
+.contact-info-card .icons img{ width:28px; height:28px; margin-right:8px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.06)); }
+
+/* map link */
+.contact-info-card .map a{
+  display:inline-block;
+  margin-top:8px;
+  color:#0b63a8;
+  font-weight:700;
+  text-decoration:none;
+}
+
+/* petite règle pour le bouton Submit du bas (réduction mobile) */
+@media (max-width:980px){
+  .contact-main .container.contact-grid{
+    grid-template-columns: 1fr;
+    padding:20px;
+  }
+  .contact-info-card{ order: 2; margin-top:18px; }
+  .contact-form-card{ order: 1; }
+}
+
+/* mobile tweaks */
+@media (max-width:520px){
+  .contact-form-card input, .contact-form-card textarea{ padding:12px; font-size:0.95rem; }
+  .btn-primary{ width:100%; justify-content:center; padding:12px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Contact enhancements ===== */
+
+/* background pour la section "Nous écrire" */
+.contact-hero{
+  background: linear-gradient(180deg, rgba(240,246,255,1) 0%, rgba(255,255,255,1) 100%);
+  padding: 28px 20px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 26px rgba(10,20,40,0.04);
+}
+
+/* container grid (déjà présent mais on renforce) */
+.contact-main .container.contact-grid{
+  display:grid;
+  grid-template-columns: 1fr 360px;
+  gap:36px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:36px 20px;
+}
+
+/* carte d'infos - fond dégradé premium */
+.contact-info-card{
+  background: linear-gradient(135deg, rgba(12,45,85,0.95), rgba(28,86,144,0.95));
+  color: #eef7ff;
+  border-radius: 12px;
+  padding:22px;
+  box-shadow: 0 14px 40px rgba(6,30,80,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* titres et textes de la carte info */
+.contact-info-card h2{ color:#fff; margin:0 0 10px; font-family:"Playfair Display", serif; }
+.contact-info-card .info-row{ color: rgba(255,255,255,0.92); margin-bottom:14px; }
+.contact-info-card .info-row strong{ display:block; color:#fff; margin-bottom:6px; font-weight:700; }
+
+/* liens phone/email dans la carte info */
+.contact-info-card a{ color:#fff; text-decoration:underline; font-weight:600; }
+.contact-info-card a[href^="tel:"]::before{ content:"☎"; margin-right:8px; }
+.contact-info-card a[href^="mailto:"]::before{ content:"✉"; margin-right:8px; }
+
+/* icons réseaux (mini cercles clairs) */
+.contact-info-card .icons img{
+  width:36px; height:36px; margin-right:8px; border-radius:8px; background:rgba(255,255,255,0.08); padding:6px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* map iframe style (arrondi) */
+.contact-info-card .map-embed{
+  width:100%; height:180px; border-radius:10px; overflow:hidden; border:1px solid rgba(255,255,255,0.06);
+  margin-top:12px;
+}
+
+/* toast notification */
+.toast-wrap{
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 99999;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.toast {
+  min-width: 260px;
+  max-width: 360px;
+  background: linear-gradient(180deg,#ffffff,#f3fbff);
+  border-left: 6px solid #2f9cff;
+  padding:12px 14px;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(20,60,120,0.12);
+  font-weight:600;
+  color:#08324a;
+}
+
+/* input invalid helper */
+.is-invalid{ border-color:#e05a4f !important; box-shadow:0 6px 20px rgba(224,90,79,0.08) !important; }
+.error-text{ color:#d9534f; font-size:0.90rem; margin-top:6px; }
+
+/* responsive */
+@media (max-width:980px){
+  .contact-main .container.contact-grid{ grid-template-columns: 1fr; padding:18px; }
+  .contact-info-card{ order:2; }
+  .contact-form-card{ order:1; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==== Numéro & email premium ==== */
+.contact-info-card a[href^="tel:"],
+.contact-info-card a[href^="mailto:"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #e6f3ff !important;
+    font-weight: 600;
+    text-decoration: none;
+
+    padding: 6px 10px;
+    border-radius: 8px;
+
+    background: rgba(255,255,255,0.08);
+    transition: all .25s ease;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* icônes bleu clair pour modern premium */
+.contact-info-card a[href^="tel:"]::before {
+    content: "📞";
+    font-size: 1rem;
+}
+
+.contact-info-card a[href^="mailto:"]::before {
+    content: "✉️";
+    font-size: 1rem;
+}
+
+/* hover premium */
+.contact-info-card a[href^="tel:"]:hover,
+.contact-info-card a[href^="mailto:"]:hover {
+    background: rgba(255,255,255,0.18);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.20);
+    color: #ffffff !important;
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page id="accueil">
+    <siteName>MN-Prestige</siteName>
+    <logo>/e-commerce-front/assets/images/logo.png</logo>
+    <title>Mode &amp; Tendances</title>
+    
+    <!-- fichier CSS (pointage unique vers style.css) -->
+    <css>/e-commerce-front/assets/css/style.css</css>
+    
+    <!-- HERO : image + titre centré -->
+    <hero>
+        <heroImage>/e-commerce-front/assets/images/hero-fashion.png</heroImage>
+        <heading>Collection Mode — Chemises ~ Robes ~ Pantalons</heading>
+        <sub>Découvrez notre sélection de pièces élégantes, durables et conçues au Sénégal.</sub>
+        <cta href="index.php?page=produits">Voir le catalogue</cta>
+    </hero>
+    
+    <featured>
+        <product id="p001">
+            <name>Robe Élégante</name>
+            <price currency="FCFA">10000</price>
+            <image>/e-commerce-front/assets/images/robe moulante.png</image>
+            <excerpt>Robe trés élégante, coupe fluide, parfaite pour cérémonies et sorties.</excerpt>
+        </product>
+        
+        <product id="p002">
+            <name>Chemise Casual Homme</name>
+            <price currency="FCFA">8000</price>
+            <image>/e-commerce-front/assets/images/chemise.png</image>
+            <excerpt>Chemise 100% coton — style décontracté et confort tout au long de la journée.</excerpt>
+        </product>
+        
+        <product id="p003">
+            <name>Pantalon Chino Coupe Droite</name>
+            <price currency="FCFA">12000</price>
+            <image>/e-commerce-front/assets/images/pantalon-chino.png</image>
+            <excerpt>Pantalon polyvalent, idéal pour bureau et week-end.</excerpt>
+        </product>
+    </featured>
+</page>
