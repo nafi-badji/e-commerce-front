@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page id="admin">
+    <siteName>MN Prestige</siteName>
+    <!-- logo uploadé dans la session (chemin local) - mis en CDATA pour éviter les problèmes d'échappement -->
+    <logo><![CDATA[/mnt/data/A_logo_features_the_interlocking_letters_"M"_and_".png]]></logo>
+        
+    <!-- flag: utile si tu veux indiquer côté XSL que l'utilisateur est admin.
+         (dans notre UI on utilise localStorage/is_admin pour simuler l'accès admin) -->
+    <user>
+        <is_admin>1</is_admin>
+        <!-- id/email facultatifs pour info -->
+        <id>admin-1</id>
+        <email>admin@mnprestige.com</email>
+    </user>
+    
+    <!-- sections optionnelles : exemples de données initiales (peuvent être lus par XSL si besoin) -->
+    <data>
+        <note>Interface ~ d'administration</note>
+        
+        <products>
+            <product id="p_demo_1">
+                <name>Robe Élégante</name>
+                <price>10000</price>
+                <stock>50</stock>
+                <category>Femme</category>
+                <image>/e-commerce-front/assets/images/robe moulante.png</image>
+                <short>Robe trés élégante, coupe fluide, parfaite pour cérémonies et sorties.</short>
+            </product>
+            <product id="p_demo_2">
+                <name>Chemise Casual Homme</name>
+                <price>8000</price>
+                <stock>30</stock>
+                <category>Homme</category>
+                <image>/e-commerce-front/assets/images/chemise.png</image>
+                <short>Chemise 100% coton — style décontracté et confort tout au long de la journée</short>
+            </product>
+        </products>
+        
+        <orders>
+            <order id="o_demo_1">
+                <customer>
+                    <name>Nafina</name>
+                    <email>nafina@gmail.com</email>
+                </customer>
+                <items>
+                    <item product_id="p_demo_1" qty="1" price="10000">Robe Élégante</item>
+                </items>
+                <total>10000</total>
+                <status>Nouveau</status>
+                <created>2025-01-10T10:45:00Z</created>
+            </order>
+        </orders>
+    </data>
+    
+</page>

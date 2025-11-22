@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page id="panier">
-    <siteName>MN Prestige</siteName>
+    <siteName>MN-Prestige</siteName>
     <logo>/e-commerce-front/assets/images/logo.png</logo>
     <title>Votre panier</title>
     
     <cart>
         <status>empty</status>
         <message>Votre panier est vide</message>
-        
-        <!-- 🔥🔥🔥 C’EST ICI QU’ON MET LE NOM DU FICHIER PNG -->
         <emptyImage>/e-commerce-front/assets/images/cart-empty.png</emptyImage>
         
         <ctaLabel>Voir les produits</ctaLabel>

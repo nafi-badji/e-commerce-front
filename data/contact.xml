@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page id="contact">
-    <siteName>MN Prestige</siteName>
+    <siteName>MN-Prestige</siteName>
     <logo>/e-commerce-front/assets/images/logo.png</logo>
     <title>Contact</title>
     
@@ -11,7 +11,7 @@
         </intro>
         
         <details>
-            <address>Quartier Plateau, Dakar, Sénégal</address>
+            <address>Quartier Maristes, Dakar, Sénégal</address>
             <email>mn@prestige.com</email>
             <phone>+221 77 123 45 67</phone>
             <hours>
@@ -25,7 +25,7 @@
         <!-- <mapEmbed>https://www.google.com/maps/embed?pb=...</mapEmbed> -->
         
         <form>
-            <introText>Envoyez-nous un message — nous répondons sous 24-48h.</introText>
+            <introText>Envoyez-nous un message — nous répondons sous ~ 24h.</introText>
             <fields>
                 <field name="firstname" type="text" label="Prénom" placeholder="Votre prénom" required="true"/>
                 <field name="lastname" type="text" label="Nom" placeholder="Votre nom" required="true"/>

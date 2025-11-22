@@ -7,11 +7,6 @@ document.addEventListener('DOMContentLoaded', function(){
   countEl.textContent = c;
 });
 
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', function(){
   const forms = document.querySelectorAll('.auth-form');
   forms.forEach(form=>{

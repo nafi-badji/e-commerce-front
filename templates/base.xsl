@@ -86,7 +86,6 @@
                                 <li><a href="index.php?page=produits">Produits</a></li>
                                 <li><a href="index.php?page=contact">Contact</a></li>
                                 <li><a href="index.php?page=apropos">À propos</a></li>
-                                <li><a href="index.php?page=connexion">Connexion</a></li>
                             </ul>
                         </div>
                         
@@ -117,7 +116,6 @@
             </body>
         </html>
     </xsl:template>
-    
     <!-- Empêche l'affichage accidentel des noeuds metadata -->
     <xsl:template match="css|logo|siteName|title|heroImage"/>
     

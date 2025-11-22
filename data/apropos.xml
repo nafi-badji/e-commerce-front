@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <page id="apropos">
-    <siteName>MN Prestige</siteName>
+    <siteName>MN-Prestige</siteName>
     <logo>/e-commerce-front/assets/images/logo.png</logo>
     <title>À propos</title>
-    <!-- optionnel : si tu veux charger un css spécifique pour cette page -->
     <!-- <css>/e-commerce-front/assets/css/style.css</css> -->
-    
     <about>
         <hero>
             <heading>À propos de MN Prestige</heading>

@@ -158,16 +158,7 @@
                                 <div class="small">Accédez à votre espace client pour commander, suivre vos achats et gérer votre compte.</div>
                             </form>
                         </div>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+            
                         <!-- Bouton Retour à l’accueil -->
                         <div class="back-home">
                             <a href="index.php?page=accueil" class="back-link">
@@ -181,13 +172,6 @@
                             </a>
                         </div>
                         
-                        
-                        
-                        
-                        
-                        
-                        
-
                         <!-- RIGHT : encart aide / infos -->
                         <aside class="help-box">
                             <h4>Bienvenue chez <xsl:value-of select="siteName"/></h4>
@@ -249,7 +233,17 @@
                     if(p.type === 'password'){ p.type = 'text'; } else { p.type = 'password'; }
                     }
                 </script>
-                
+                <!-- Au bon endroit dans connexion.xsl (dans <script> après la soumission réussie) -->
+                <script>
+                    // Exemple simple : après validation côté serveur tu peux set le flag côté front
+                    function onLoginSuccess() {
+                    localStorage.setItem('user_logged', '1');
+                    // redirige vers la page sur laquelle tu veux (par ex produits)
+                    window.location.href = 'index.php?page=produits';
+                    }
+                    
+                    // Si tu fais un submit normal, appelle onLoginSuccess() après retour OK du serveur.
+                </script>
 
             </body>
         </html>

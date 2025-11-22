@@ -4,11 +4,6 @@
     
     <!-- importer le squelette général (header/footer) -->
     <xsl:import href="base.xsl"/>
-    
-    
-    
-    
-    
     <xsl:template match="hero">
         <section class="hero-banner" role="banner">
             <!-- fond : si heroImage présent alors background-image, sinon gradient -->
@@ -74,6 +69,16 @@
                 </xsl:for-each>
             </div>
         </section>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     </xsl:template>
     
     <!-- Empêche l'affichage accidentel des noeuds de métadonnées -->

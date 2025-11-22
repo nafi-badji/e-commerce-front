@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page id="produits">
+    <siteName>MN-Prestige</siteName>
+    <title>Produits</title>
+    
+    <categories>
+        <category id="all">Tous</category>
+        <category id="femme">Femme</category>
+        <category id="homme">Homme</category>
+        <category id="accessoire">Accessoires</category>
+    </categories>
+    
+    <products>
+        <!-- id unique, name, price (number), stock (0 = out), category, image path, shortDesc -->
+        <product>
+            <id>p001</id>
+            <name>Robe Élégante</name>
+            <price>10000</price>
+            <stock>12</stock>
+            <category>femme</category>
+            <image>/e-commerce-front/assets/images/robe moulante.png</image>
+            <short>Robe trés élégante, coupe fluide, parfaite pour cérémonies et sorties.</short>
+        </product>
+        
+        <product>
+            <id>p002</id>
+            <name>Chemise Casual Homme</name>
+            <price>8000</price>
+            <stock>5</stock>
+            <category>homme</category>
+            <image>/e-commerce-front/assets/images/chemise.png</image>
+            <short>Chemise 100% coton — style décontracté.</short>
+        </product>
+        
+        <product>
+            <id>p003</id>
+            <name>Pantalon Chino Coupe Droite</name>
+            <price>12000</price>
+            <stock>8</stock>
+            <category>homme</category>
+            <image>/e-commerce-front/assets/images/pantalon-chino.png</image>
+            <short>Pantalon polyvalent, idéal pour bureau et week-end.</short>
+        </product>
+        
+        <product>
+            <id>p004</id>
+            <name>costume</name>
+            <price>55000</price>
+            <stock>7</stock>
+            <category>homme</category>
+            <image>/e-commerce-front/assets/images/costume.png</image>
+            <short>Costume élégant — silhouette soignée pour toutes occasions formelles.</short>
+        </product>
+        
+        <product>
+            <id>p005</id>
+            <name>Cardigan</name>
+            <price>5000</price>
+            <stock>20</stock>
+            <category>homme</category>
+            <image>/e-commerce-front/assets/images/cardigan.png</image>
+            <short> Cardigan court à manches courtes — élégant et léger, parfait pour superposer.</short>
+        </product>
+        
+        <product>
+            <id>p006</id>
+            <name>Polo</name>
+            <price>6000</price>
+            <stock>15</stock>
+            <category>homme</category>
+            <image>/e-commerce-front/assets/images/polo-noir.png</image>
+            <short>Polo — look casual chic.</short>
+        </product>
+        
+        
+        <product>
+            <id>p008</id>
+            <name>veste-femme</name>
+            <price>4000</price>
+            <stock>9</stock>
+            <category>femme</category>
+            <image>/e-commerce-front/assets/images/veste-femme.png</image>
+            <short>Veste femme élégante — coupe moderne et confort quotidien.</short>
+        </product>
+        
+        
+        
+        <product>
+            <id>p011</id>
+            <name>Montre-Femme</name>
+            <price>20000</price>
+            <stock>10</stock>
+            <category>femme</category>
+            <image>/e-commerce-front/assets/images/Montre-Femme.png</image>
+            <short>Montre femme Hannah Martin — élégance discrète et design raffiné.</short>
+        </product>
+        
+        <product>
+            <id>p012</id>
+            <name>chaussures-cuir</name>
+            <price>25000</price>
+            <stock>15</stock>
+            <category>homme</category>
+            <image>/e-commerce-front/assets/images/chaussures-cuir.jpg</image>
+            <short>Chaussure homme en cuir — élégante et professionnelle.</short>
+        </product>
+
+    </products>
+</page>
