@@ -1,25 +1,39 @@
-# CakePHP 3
+# ============================================
+# Fichiers à ignorer par Git
+# ============================================
 
-/vendor/*
-/config/app.php
+# Fichiers de configuration sensibles
+config.php
+database.php
 
-/tmp/cache/models/*
-!/tmp/cache/models/empty
-/tmp/cache/persistent/*
-!/tmp/cache/persistent/empty
-/tmp/cache/views/*
-!/tmp/cache/views/empty
-/tmp/sessions/*
-!/tmp/sessions/empty
-/tmp/tests/*
-!/tmp/tests/empty
+# Fichiers uploadés par les utilisateurs
+assets/uploads/*
+!assets/uploads/.gitkeep
 
-/logs/*
-!/logs/empty
+# Fichiers de logs
+*.log
 
-# CakePHP 2
+# Fichiers temporaires
+*.tmp
+*.temp
+*.cache
 
-/app/tmp/*
-/app/Config/core.php
-/app/Config/database.php
-/vendors/*
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Fichiers d'éditeur
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Fichiers de sauvegarde
+*.bak
+*.backup
+*~
+
+# Fichiers de session PHP
+sessions/

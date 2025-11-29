@@ -30,13 +30,21 @@ $order->execute([$user_id, $adresse]);
 $order_id = $conn->lastInsertId();
 
 // 2️⃣ Ajouter les produits dans order_details
+// Note: La structure imposée n'a pas de champ quantite dans order_details
+// On crée une ligne par unité de produit (ou une ligne par produit avec le prix unitaire)
 $insert_item = $conn->prepare("
     INSERT INTO order_details (order_id, product_id, prix_unitaire)
     VALUES (?, ?, ?)
 ");
 
 foreach ($items as $item) {
-    $insert_item->execute([$order_id, $item["product_id"], $item["prix"]]);
+    $quantite = $item["quantite"] ?? 1;
+    $prix_unitaire = $item["prix"];
+    
+    // Créer une ligne par unité (selon structure imposée sans quantite)
+    for ($i = 0; $i < $quantite; $i++) {
+        $insert_item->execute([$order_id, $item["product_id"], $prix_unitaire]);
+    }
 }
 
 // 3️⃣ Vider le panier

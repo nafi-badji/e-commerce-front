@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page id="apropos">
+    <siteName>MN-Prestige</siteName>
+    <logo>/e-commerce-front/assets/images/logo.png</logo>
+    <title>À propos</title>
+    <!-- <css>/e-commerce-front/assets/css/style.css</css> -->
+    <about>
+        <hero>
+            <heading>À propos de MN Prestige</heading>
+            <sub>Mode premium &amp; créations locales — qualité, style et authenticité.</sub>
+        </hero>
+        
+        <history>
+            <heading>Notre histoire</heading>
+            <p>
+                Fondée à Dakar par des passionnés de mode, MN Prestige est née de l'envie de créer
+                des collections élégantes, responsables et ancrées dans l'identité sénégalaise.
+                Depuis nos débuts nous travaillons étroitement avec des ateliers locaux pour
+                valoriser savoir-faire et matières premières.
+            </p>
+            <p>
+                Ce parcours mêle tradition et modernité : imprimés locaux, coupes contemporaines,
+                et une attention particulière portée à la qualité et à la durabilité.
+            </p>
+        </history>
+        
+        <mission>
+            <heading>Notre mission🎯 </heading>
+            <p>
+                Proposer des vêtements stylés, durables et accessibles — tout en soutenant
+                l'artisanat local. Nous voulons offrir une expérience shopping premium
+                où design et responsabilités environnementale &amp; sociale se rencontrent.
+            </p>
+            <ul>
+                <li>Collections éthiques &amp; responsables</li>
+                <li>Soutien aux ateliers locaux</li>
+                <li>Livraison rapide et service client local</li>
+            </ul>
+        </mission>
+        
+        <team>
+            <heading>L'équipe fondatrice</heading>
+            <member id="m1">
+                <name>Nafissatou Badji</name>
+                <role>Developpeuse Web</role>
+                <bio>Designer &amp; styliste, responsable des collections femme.</bio>
+                <photo>/e-commerce-front/assets/images/NAFINA.jpg</photo>
+            </member>
+            <member id="m2">
+                <name>Lamine Kamara</name>
+                <role>Technicien IT</role>
+                <bio>Gestion logistique &amp; partenariats ateliers.</bio>
+                <photo>/e-commerce-front/assets/images/MOUHA.jpg</photo>
+            </member>
+            <!-- ajoute d'autres membres ici si besoin -->
+        </team>
+        
+        <highlights>
+            <heading>Nos atouts</heading>
+            <item>Designs exclusifs &amp; fabriqués localement</item>
+            <item>Matériaux de qualité et confection maîtrisée</item>
+            <item>Service client à Dakar et livraison prioritaire</item>
+            <item>Politique de retours simple</item>
+        </highlights>
+        
+        <cta>
+            <text>Envie d'en savoir plus ? Contactez-nous pour des collaborations ou des commandes professionnelles.</text>
+        </cta>
+    </about>
+</page>

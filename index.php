@@ -1,62 +1,107 @@
 <?php
+// Démarrer la session pour toutes les pages
 session_start();
-require_once "database.php";
 
-// Vérifier si l'utilisateur est connecté
-$is_logged_in = isset($_SESSION["user_id"]);
+// index.php
+// `page` param: ex: index.php?page=connexion
+$page = isset($_GET['page']) ? preg_replace('/[^a-z0-9_-]/i', '', $_GET['page']) : 'accueil';
+$xmlFile = __DIR__ . "/data/{$page}.xml";
+$xslFile = __DIR__ . "/templates/{$page}.xsl";
 
-// Récupération des produits
-$sql = "SELECT * FROM products ORDER BY created_at DESC";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Générer dynamiquement le XML pour la page produits depuis la base de données
+if ($page === 'produits') {
+    require_once __DIR__ . '/database.php';
+    
+    // Créer le document XML
+    $xml = new DOMDocument('1.0', 'UTF-8');
+    $root = $xml->createElement('page');
+    $root->setAttribute('id', 'produits');
+    $xml->appendChild($root);
+    
+    // Métadonnées
+    $siteName = $xml->createElement('siteName', 'MN-Prestige');
+    $title = $xml->createElement('title', 'Produits');
+    $root->appendChild($siteName);
+    $root->appendChild($title);
+    
+    // Catégories
+    $categories = $xml->createElement('categories');
+    $catList = [
+        ['id' => 'all', 'name' => 'Tous'],
+        ['id' => 'femme', 'name' => 'Femme'],
+        ['id' => 'homme', 'name' => 'Homme'],
+        ['id' => 'accessoire', 'name' => 'Accessoires']
+    ];
+    foreach ($catList as $cat) {
+        $category = $xml->createElement('category', $cat['name']);
+        $category->setAttribute('id', $cat['id']);
+        $categories->appendChild($category);
+    }
+    $root->appendChild($categories);
+    
+    // Produits depuis la base de données
+    $products = $xml->createElement('products');
+    try {
+        // Récupérer les produits avec tous les champs disponibles
+        $stmt = $conn->prepare("SELECT id, nom, prix, image, description, 
+                                COALESCE(stock, 10) as stock, 
+                                COALESCE(category, 'homme') as category 
+                                FROM products ORDER BY created_at DESC");
+        $stmt->execute();
+        $dbProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($dbProducts as $dbProduct) {
+            $product = $xml->createElement('product');
+            
+            $id = $xml->createElement('id', $dbProduct['id']);
+            $name = $xml->createElement('name', htmlspecialchars($dbProduct['nom'], ENT_XML1, 'UTF-8'));
+            $price = $xml->createElement('price', number_format($dbProduct['prix'], 0, '', ''));
+            $stock = $xml->createElement('stock', $dbProduct['stock'] ?? '10');
+            $category = $xml->createElement('category', $dbProduct['category'] ?? 'homme');
+            $image = $xml->createElement('image', htmlspecialchars($dbProduct['image'] ?? '/e-commerce-front/assets/images/placeholder.png', ENT_XML1, 'UTF-8'));
+            $short = $xml->createElement('short', htmlspecialchars(substr($dbProduct['description'] ?? '', 0, 100), ENT_XML1, 'UTF-8'));
+            
+            $product->appendChild($id);
+            $product->appendChild($name);
+            $product->appendChild($price);
+            $product->appendChild($stock);
+            $product->appendChild($category);
+            $product->appendChild($image);
+            $product->appendChild($short);
+            
+            $products->appendChild($product);
+        }
+    } catch (PDOException $e) {
+        // En cas d'erreur, on garde un XML vide
+        error_log("Erreur lors de la récupération des produits: " . $e->getMessage());
+    }
+    $root->appendChild($products);
+    
+    // Utiliser le XML généré
+    $xmlContent = $xml->saveXML();
+    $xmlDoc = new DOMDocument();
+    $xmlDoc->loadXML($xmlContent);
+    
+} else {
+    // Pour les autres pages, charger depuis le fichier XML
+    // fallback 404
+    if (!file_exists($xmlFile) || !file_exists($xslFile)) {
+        $xmlFile = __DIR__ . "/data/404.xml";
+        $xslFile = __DIR__ . "/templates/404.xsl";
+    }
+    
+    $xmlDoc = new DOMDocument();
+    $xmlDoc->load($xmlFile);
+}
 
+// Charger et appliquer le template XSL
+$xsl = new DOMDocument();
+$xsl->load($xslFile);
+
+$proc = new XSLTProcessor();
+$proc->importStylesheet($xsl);
+// You can pass variables if needed: $proc->setParameter('', 'foo', 'bar');
+
+$html = $proc->transformToXML($xmlDoc);
+echo $html;
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Boutique - Accueil</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-<!-- HEADER -->
-<header>
-    <h1>Ma Boutique</h1>
-
-    <nav>
-        <?php if ($is_logged_in): ?>
-            <a href="logout.php">Déconnexion</a>
-            <a href="checkout.php">Panier</a>
-        <?php else: ?>
-            <a href="login.php">Connexion</a>
-            <a href="register.php">Inscription</a>
-        <?php endif; ?>
-    </nav>
-</header>
-
-<hr>
-
-<!-- LISTE DES PRODUITS -->
-<h2>Nos produits</h2>
-
-<div class="products">
-    <?php foreach ($products as $product): ?>
-        <div class="product-card">
-            <img src="uploads/<?php echo $product['image']; ?>" alt="" width="150">
-
-            <h3><?php echo htmlspecialchars($product['nom']); ?></h3>
-            <p><?php echo htmlspecialchars($product['description']); ?></p>
-            <strong><?php echo number_format($product['prix'], 2, ',', ' '); ?> €</strong>
-
-            <form method="POST" action="add_to_cart.php">
-                <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                <button type="submit">Ajouter au panier</button>
-            </form>
-        </div>
-    <?php endforeach; ?>
-</div>
-
-</body>
-</html>
