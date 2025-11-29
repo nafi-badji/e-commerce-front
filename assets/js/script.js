@@ -31,3 +31,60 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  (function(){
+    const header = document.querySelector('.site-header');
+    if(!header) return;
+
+    // seuil en px pour appliquer l'effet 'scrolled'
+    const THRESHOLD = 12;
+
+    function onScroll(){
+      if(window.scrollY > THRESHOLD) {
+        if(!header.classList.contains('scrolled')) header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }
+
+    // initial state (utile si la page est rechargée au milieu)
+    document.addEventListener('DOMContentLoaded', onScroll);
+    window.addEventListener('scroll', onScroll);
+  })();
+</script>
