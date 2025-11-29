@@ -1,12 +1,13 @@
-// panier.js
+// /assets/js/panier.js (REPLACE)
 (function(){
-  const STORAGE_KEY = "mn_cart_v1"; // doit être la même clé que ta page produits utilise
+  const STORAGE_KEY = 'mn_cart_v1';
+  const ROOT_ID = 'cart-root';
+  const CART_COUNT_ID = 'cart-count';
 
-  function getCart(){
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {items:[]}; }
-    catch(e){ return {items:[]}; }
-  }
+  function readCart(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }catch(e){ return []; } }
+  function writeCart(cart){ localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); render(); updateCount(); }
 
+<<<<<<< HEAD
   function saveCart(cart){
     localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
     render();
@@ -15,164 +16,176 @@
       updateCartCount();
     }
   }
+=======
+  function formatPrice(n){ return (Number(n)||0).toLocaleString('fr-FR') + ' FCFA'; }
+>>>>>>> 0713bd37c69c23ad29b29f41ac44fd0c02e28162
 
-  function formatPrice(n){
-    // si prix numériques -> formattage
-    const num = Number(n) || 0;
-    return num.toLocaleString("fr-FR") + " FCFA";
+  function updateCount(){
+    const el = document.getElementById(CART_COUNT_ID);
+    if(!el) return;
+    const cart = readCart();
+    const n = cart.reduce((s,i)=> s + Number(i.qty||0), 0);
+    el.textContent = n;
   }
 
   function render(){
-    const root = document.getElementById("cart-root");
+    const root = document.getElementById(ROOT_ID);
     if(!root) return;
-
-    const cart = getCart();
-    if(!cart.items || !cart.items.length){
+    const cart = readCart();
+    if(!cart.length){
       root.innerHTML = `
         <div class="cart-empty">
+          <img src="/e-commerce-front/assets/images/cart-empty.png" alt="Panier vide" style="max-width:160px;margin:0 auto 12px;display:block"/>
           <h2 class="cart-empty-title">Votre panier est vide</h2>
           <p class="cart-empty-desc">Ajoutez des produits depuis la page Produits.</p>
-          <a class="btn btn-primary" href="index.php?page=produits">Voir les produits</a>
+          <div style="margin-top:14px;">
+            <a class="btn btn-primary" href="index.php?page=produits">Voir les produits</a>
+          </div>
         </div>
       `;
       return;
     }
 
+    // table-like layout
     let total = 0;
-    const rows = cart.items.map(item=>{
+    let rows = '';
+    cart.forEach(item=>{
       const line = (Number(item.price)||0) * (Number(item.qty)||1);
       total += line;
-      // protège src vide
-      const src = item.image ? item.image : "/e-commerce-front/assets/images/placeholder.png";
-      return `
-        <tr data-id="${item.id}">
-          <td><img src="${src}" alt="${item.name}"/></td>
-          <td><strong>${escapeHtml(item.name)}</strong><div class="muted">${escapeHtml(item.short||"")}</div></td>
-          <td>${formatPrice(item.price)}</td>
-          <td>
-            <div class="qty-control">
-              <button class="qty-btn dec">−</button>
-              <input class="qty-input" type="number" value="${item.qty}" min="1"/>
-              <button class="qty-btn inc">+</button>
+      const img = item.image || '/e-commerce-front/assets/images/placeholder.png';
+      rows += `
+        <div class="cart-line" data-id="${item.id}" style="display:flex;gap:12px;align-items:center;padding:12px;border-bottom:1px solid #f1f6fb">
+          <img src="${img}" alt="${escapeHtml(item.name)}" style="width:92px;height:92px;object-fit:cover;border-radius:8px"/>
+          <div style="flex:1">
+            <div style="font-weight:700">${escapeHtml(item.name)}</div>
+            <div class="muted" style="font-size:.95rem">${escapeHtml(item.short||'')}</div>
+            <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+              <button class="qty-dec" style="padding:6px 10px">−</button>
+              <input class="qty-input" type="number" value="${item.qty}" min="1" style="width:64px;text-align:center;padding:6px;border-radius:8px;border:1px solid #eef3fb"/>
+              <button class="qty-inc" style="padding:6px 10px">+</button>
+              <button class="remove-item" style="margin-left:12px;background:transparent;border:0;color:#e04a4a;cursor:pointer">Supprimer</button>
             </div>
-          </td>
-          <td class="line-total">${formatPrice(line)}</td>
-        </tr>
+          </div>
+          <div style="min-width:120px;text-align:right">
+            <div style="font-weight:700">${formatPrice(item.price)}</div>
+            <div style="color:#6b7280;margin-top:8px">${formatPrice(line)}</div>
+          </div>
+        </div>
       `;
-    }).join("");
+    });
 
     root.innerHTML = `
-      <table class="cart-table" role="table" aria-label="Liste des articles du panier">
-        <thead><tr><th>Produit</th><th>Nom</th><th>Prix</th><th>Quantité</th><th>Total</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-
-      <div class="cart-summary">
-        <div class="cart-total">Total : <span id="cart-total">${formatPrice(total)}</span></div>
-        <div class="cart-actions">
+      <div class="cart-list">${rows}</div>
+      <div class="cart-summary" style="display:flex;justify-content:space-between;align-items:center;margin-top:18px">
+        <div class="cart-total" style="font-weight:700">Total : <span id="cart-total">${formatPrice(total)}</span></div>
+        <div class="cart-actions" style="display:flex;gap:12px">
           <button id="clear-cart" class="btn-outline">Vider le panier</button>
           <button id="checkout" class="btn-primary">Finaliser la commande</button>
         </div>
       </div>
     `;
 
-    // lier les boutons
-    document.querySelectorAll(".qty-btn.inc").forEach(btn=>{
-      btn.addEventListener("click", (e)=>{
-        const tr = e.target.closest("tr");
-        const id = tr.dataset.id;
+    // bind controls
+    root.querySelectorAll('.qty-inc').forEach(b=>{
+      b.addEventListener('click', (e)=>{
+        const id = e.target.closest('.cart-line').dataset.id;
         changeQty(id, +1);
       });
     });
-
-    document.querySelectorAll(".qty-btn.dec").forEach(btn=>{
-      btn.addEventListener("click", (e)=>{
-        const tr = e.target.closest("tr");
-        const id = tr.dataset.id;
+    root.querySelectorAll('.qty-dec').forEach(b=>{
+      b.addEventListener('click', (e)=>{
+        const id = e.target.closest('.cart-line').dataset.id;
         changeQty(id, -1);
       });
     });
-
-    document.querySelectorAll(".qty-input").forEach(input=>{
-      input.addEventListener("change", (e)=>{
-        const tr = e.target.closest("tr");
-        const id = tr.dataset.id;
-        const v = Math.max(1, parseInt(e.target.value)||1);
+    root.querySelectorAll('.qty-input').forEach(inp=>{
+      inp.addEventListener('change', (e)=>{
+        const id = e.target.closest('.cart-line').dataset.id;
+        const v = Math.max(1, parseInt(e.target.value||1));
         setQty(id, v);
       });
     });
+    root.querySelectorAll('.remove-item').forEach(b=>{
+      b.addEventListener('click', (e)=>{
+        const id = e.target.closest('.cart-line').dataset.id;
+        removeItem(id);
+      });
+    });
 
-    document.getElementById("clear-cart").addEventListener("click", ()=>{
-      if(confirm("Vider le panier ?")) {
+    const clearBtn = document.getElementById('clear-cart');
+    if(clearBtn) clearBtn.addEventListener('click', ()=>{
+      if(confirm('Vider le panier ?')) {
         localStorage.removeItem(STORAGE_KEY);
         render();
+<<<<<<< HEAD
         // Appeler la fonction globale updateCartCount() si elle existe
         if (typeof updateCartCount === 'function') {
           updateCartCount();
         }
+=======
+        updateCount();
+>>>>>>> 0713bd37c69c23ad29b29f41ac44fd0c02e28162
       }
     });
 
-    document.getElementById("checkout").addEventListener("click", ()=>{
-      // ici tu peux appeler back-end / action php si tu veux, mais on simule la validation côté front
-      // => affiche confirmation et vide le panier
-      showToast("Votre commande a été passée avec succès 🎉");
+    const checkoutBtn = document.getElementById('checkout');
+    if(checkoutBtn) checkoutBtn.addEventListener('click', ()=>{
+      // simulation de validation : ici tu peux appeler ton backend
+      showToast('Votre commande a été passée avec succès 🎉');
       localStorage.removeItem(STORAGE_KEY);
+<<<<<<< HEAD
       // Appeler la fonction globale updateCartCount() si elle existe
       if (typeof updateCartCount === 'function') {
         updateCartCount();
       }
       // redirection facultative
       setTimeout(()=>{ window.location.href = "index.php?page=accueil"; }, 1100);
+=======
+      render();
+      updateCount();
+      setTimeout(()=> window.location.href = 'index.php?page=accueil', 1100);
+>>>>>>> 0713bd37c69c23ad29b29f41ac44fd0c02e28162
     });
   }
 
   function changeQty(id, delta){
-    const cart = getCart();
-    const it = cart.items.find(x=>String(x.id) === String(id));
+    const cart = readCart();
+    const it = cart.find(x=> String(x.id) === String(id));
     if(!it) return;
     it.qty = Math.max(1, (Number(it.qty)||1) + delta);
-    saveCart(cart);
+    writeCart(cart);
   }
-
   function setQty(id, q){
-    const cart = getCart();
-    const it = cart.items.find(x=>String(x.id) === String(id));
+    const cart = readCart();
+    const it = cart.find(x=> String(x.id) === String(id));
     if(!it) return;
     it.qty = Math.max(1, Number(q)||1);
-    saveCart(cart);
+    writeCart(cart);
+  }
+  function removeItem(id){
+    let cart = readCart();
+    cart = cart.filter(x=> String(x.id) !== String(id));
+    writeCart(cart);
   }
 
-  // simple toast en bas
   function showToast(msg){
-    let t = document.getElementById("__mn_toast");
+    let t = document.getElementById('__mn_toast');
     if(!t){
-      t = document.createElement("div");
-      t.id = "__mn_toast";
-      t.style.position = "fixed";
-      t.style.right = "18px";
-      t.style.bottom = "18px";
-      t.style.background = "rgba(10,20,40,0.92)";
-      t.style.color = "#fff";
-      t.style.padding = "12px 18px";
-      t.style.borderRadius = "10px";
-      t.style.boxShadow = "0 6px 20px rgba(0,0,0,0.12)";
-      t.style.zIndex = 9999;
+      t = document.createElement('div');
+      t.id='__mn_toast';
+      Object.assign(t.style,{position:'fixed',right:'18px',bottom:'18px',background:'#111',color:'#fff',padding:'10px 14px',borderRadius:'8px',zIndex:9999});
       document.body.appendChild(t);
     }
-    t.innerText = msg;
-    t.style.opacity = "1";
-    setTimeout(()=>{ t.style.transition = "opacity .6s"; t.style.opacity = "0"; }, 1600);
+    t.textContent = msg;
+    t.style.opacity = '1';
+    clearTimeout(t._t);
+    t._t = setTimeout(()=> { t.style.transition='opacity .5s'; t.style.opacity='0'; }, 2000);
   }
 
-  function escapeHtml(s){
-    if(!s) return "";
-    return String(s).replace(/[&<>"']/g, function(m){
-      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
-    });
-  }
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
   // init
+<<<<<<< HEAD
   document.addEventListener("DOMContentLoaded", function(){
     render();
     // Appeler la fonction globale updateCartCount() si elle existe
@@ -279,3 +292,10 @@ document.addEventListener('DOMContentLoaded', function(){
     // rediriger si nécessaire
   });
 });
+=======
+  document.addEventListener('DOMContentLoaded', ()=>{
+    render();
+    updateCount();
+  });
+})();
+>>>>>>> 0713bd37c69c23ad29b29f41ac44fd0c02e28162

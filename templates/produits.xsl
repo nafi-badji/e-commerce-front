@@ -12,8 +12,6 @@
                 <title><xsl:value-of select="title"/> - <xsl:value-of select="siteName"/></title>
                 
                 <link rel="stylesheet" href="/e-commerce-front/assets/css/style.css"/>
-                <!-- Script global pour le compteur du panier -->
-                <script src="/e-commerce-front/assets/js/script.js" defer="defer"></script>
                 <!-- ajout spécifique pour la page produits (optionnel) -->
                 <style>
                     /* small page-specific CSS fallback (tu peux mettre dans style.css) */
