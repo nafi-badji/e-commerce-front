@@ -10,6 +10,36 @@
                 
                 <!-- CSS global -->
                 <link rel="stylesheet" href="/e-commerce-front/assets/css/style.css"/>
+                <!-- === Patch header fixe (copier dans <head> des XSL: produits.xsl & panier.xsl) === -->
+                <style>
+                    :root{ --site-header-h:72px; }
+                    .site-header{
+                    position:fixed !important;
+                    top:0 !important;
+                    left:0 !important;
+                    right:0 !important;
+                    height:var(--site-header-h) !important;
+                    background:rgba(255,255,255,0.98) !important;
+                    z-index:99999 !important;
+                    transition: box-shadow .22s ease, background .22s ease;
+                    }
+                    body, main, .site-main { padding-top: calc(var(--site-header-h) + 18px) !important; }
+                    @media (max-width:800px){
+                    :root{ --site-header-h:64px; }
+                    body, main, .site-main { padding-top: calc(var(--site-header-h) + 12px) !important; }
+                    }
+                </style>
+                
+                <script>
+                    (function(){
+                    var header = document.querySelector('.site-header');
+                    if(!header) return;
+                    function onScroll(){ header.classList.toggle('scrolled', window.scrollY > 8); }
+                    window.addEventListener('scroll', onScroll, {passive:true});
+                    onScroll();
+                    })();
+                </script>
+
                 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
                 
                 <!-- small page-specific styles (override / complément de style.css) -->
